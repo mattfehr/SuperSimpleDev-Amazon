@@ -58,6 +58,37 @@ class Clothing extends Product { //inheritance
   }
 }
 
+/*
+const date = new Date();
+console.log(date);
+console.log(date.toLocaleTimeString());
+*/
+
+/*
+console.log(this);
+
+const object2 = {
+  a: 2,
+  b: this.a
+}
+error bc at this point this points to nothing
+*/
+
+/*
+function logThis() {
+  console.log(this);
+}
+logThis();
+logThis.call('hello'); //this can be changed to whatever in functions
+
+const object3 = {
+  method: () => {
+    console.log(this); //arrow functions do not change value of this so error
+  }
+}
+object3.method();
+*/
+
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
