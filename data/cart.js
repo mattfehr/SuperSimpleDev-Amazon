@@ -68,3 +68,18 @@ export function updateDeliveryOption(productId, deliveryOptionId) {
   matchingItem.deliveryOptionId = deliveryOptionId;
   saveToStorage();
 }
+
+export let products = [];
+
+export function loadCart(fun) { //callback - function to run in the future
+  const xhr = new XMLHttpRequest();
+
+  //this block makes it so it waits
+  xhr.addEventListener('load', () => {
+    console.log(xhr.response);
+    fun();
+  });
+
+  xhr.open('GET', 'https://supersimplebackend.dev/cart')
+  xhr.send(); //async - wont wait for response to come back
+}
