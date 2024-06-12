@@ -91,6 +91,33 @@ object3.method();
 
 export let products = [];
 
+export function loadProductsFetch() {
+  //default get request using promise - waits for response and saves it in a parameter
+  const promise = fetch(
+    'https://supersimplebackend.dev/products'
+  ).then((response) => {
+    //response.json is asynch - return a promise
+    return response.json();
+  }).then((productsData) => {
+    products = productsData.map((productDetails) => {
+      if (productDetails.type === 'clothing') {
+        return new Clothing(productDetails);
+      }
+      return new Product(productDetails);
+    });
+
+    console.log('load products');
+  });
+
+  return promise;
+}
+/*
+loadProductsFetch().then(() => {
+  console.log('next step');
+
+});
+*/
+
 export function loadProducts(fun) { //callback - function to run in the future
   const xhr = new XMLHttpRequest();
 
