@@ -5,6 +5,21 @@ import { loadCart } from "../data/cart.js";
 //import '../data/cart-class.js';
 //import '../data/backend-practice.js';
 
+async function loadPage() { //async makes the function return a promise 
+  await loadProductsFetch(); //make the program wait for this function to finish getting response from backend
+
+  await new Promise((resolve) => {
+    loadCart(() => {
+      resolve();
+    });
+  });
+
+  renderOrderSummary();
+  renderPaymentSummary();
+}
+loadPage();
+
+/*
 Promise.all([ //allows multiple promises to run at the same time and wait for all of them to finish
   loadProductsFetch(),
   new Promise((resolve) => {
@@ -18,6 +33,7 @@ Promise.all([ //allows multiple promises to run at the same time and wait for al
   renderOrderSummary();
   renderPaymentSummary();
 });
+*/
 
 /*
 //promise creates a seperate thread of code
