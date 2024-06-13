@@ -6,14 +6,22 @@ import { loadCart } from "../data/cart.js";
 //import '../data/backend-practice.js';
 
 async function loadPage() { //async makes the function return a promise 
-  await loadProductsFetch(); //make the program wait for this function to finish getting response from backend
+  try {
+    //throw 'error1';
 
-  await new Promise((resolve) => {
-    loadCart(() => {
-      resolve();
+    await loadProductsFetch(); //make the program wait for this function to finish getting response from backend
+
+    const value = await new Promise((resolve, reject) => { //reject is a fucntion that lets us create an error in the future
+      //throw 'error2';
+      loadCart(() => {
+        //reject('error3');
+        resolve();
+      });
     });
-  });
-
+  } catch (error) {
+    console.log('Unexpected error. Please try again later.');
+  }
+  
   renderOrderSummary();
   renderPaymentSummary();
 }
